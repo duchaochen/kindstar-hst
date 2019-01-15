@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kindstar.hst.lis.mapper.AreaInfoMapper">
+
+    <resultMap id="areaInfoMapperMap" type="com.kindstar.hst.lis.pojo.AreaInfo">
+        <result column="AreaCode" property="areaCode"/>
+        <result column="AreaName" property="areaName"/>
+        <result column="ParentAreaCode" property="parentAreaCode"/>
+        <result column="CityLevel" property="cityLevel"/>
+        <result column="AreaNumber" property="areaNumber"/>
+        <result column="Wb3" property="wb3"/>
+        <result column="Py3" property="py3"/>
+    </resultMap>
+    
+    <select id="findAll" resultMap="areaInfoMapperMap">
+        select AreaCode,AreaName,Superintendent,ParentAreaCode,CityLevel,Valid,AreaNumber,Wb3,Py3,CreateTime
+        from [BaseLis3.0]..BA_Area where Valid=1
+    </select>
+</mapper>
+

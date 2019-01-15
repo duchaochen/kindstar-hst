@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kindstar.hst.lis.mapper.HospitalMapper">
+
+    <resultMap id="hospitalMapperMap" type="com.kindstar.hst.lis.pojo.HospitalInfo">
+        <result column="HospitalCode" property="hospitalCode"/>
+        <result column="AreaCode" property="areaCode"/>
+        <result column="HospitalName" property="hospitalName"/>
+        <result column="Discount" property="discount"/>
+        <result column="MyBarcode" property="myBarcode"/>
+    </resultMap>
+    
+    <select id="findHospitalAll" resultMap="hospitalMapperMap">
+        select HospitalCode,AreaCode,AreaCode1,HospitalName,Discount,MyBarcode
+        from [BaseLis3.0]..YY_Hospital where Valid=1
+    </select>
+</mapper>
+

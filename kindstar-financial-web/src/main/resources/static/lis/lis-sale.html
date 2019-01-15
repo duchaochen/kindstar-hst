@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="/content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/content/layui/css/layui.css">
+</head>
+<body>
+
+<form id="sale-vue" class="layui-fluid layui-form">
+    <div class="layui-row">
+        <div class="layui-col-sm12">
+            <blockquote class="layui-elem-quote">
+					<span class="layui-breadcrumb">
+					  <a href="">销售模块</a>
+					  <a><cite>销售数据获取</cite></a>
+					</span>
+            </blockquote>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-col-md12" >
+                <div class="layui-form-item" id="where-btn">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 80px;">开始时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="startdate" name="startdate" autocomplete="off"
+                                   class="layui-input" v-model="startdate" style="width: 100px;">
+                        </div>
+                    </div>
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" style="width: 80px;">结束时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="stopdate" name="stopdate" autocomplete="off"
+                                   class="layui-input"  v-model="stopdate" style="width: 100px;">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">地区</label>
+                        <div class="layui-input-inline">
+                            <select id="areaval" lay-verify="" lay-search>
+                                <option value="">--请选择--</option>
+                                <!--<option v-for="area in areaList" v-model="area.areaName">{{area.areaName}}</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline">
+                            <select id="hospitalval" lay-verify="" lay-search style="width: 200px;">
+                                <option value="">--请选择--</option>
+                                <!--<option v-for="hospital in hospitalList" v-model="hospital.hospitalName">{{hospital.hospitalName}}</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button id="sale-search" class="layui-btn layui-btn-radius" lay-submit="" lay-filter="*" v-on:click="search">数据查询</button>
+                        <button id="sale-saveData" class="layui-btn layui-btn-radius" lay-submit="" lay-filter="*" v-on:click="saveData">数据保存</button>
+                        <button id="sale-submitData" class="layui-btn layui-btn-radius" lay-submit="" lay-filter="*" v-on:click="submitData">数据提交</button>
+                    </div>
+                    <div class="layui-inline">
+                        <button id="sale-getdata" class="layui-btn layui-btn-radius" lay-submit="" lay-filter="*" v-on:click="getData">数据拉取</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="layui-row" id="progress-row" style="display: none;">
+        <div class="layui-col-md12">
+            <div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="demo">
+                <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <table id="sale-data" lay-filter="sale-data">
+            </table>
+            <script type="text/html" id="sale-data-bar">
+                <!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
+<script src="/content/layui/layui.js"></script>
+<script src="/content/vue.min.js"></script>
+<script src="/content/axios.min.js"></script>
+<script src="/content/js/layui-config.js"></script>
+<script src="/content/js/config.js"></script>
+<script src="/content/js/lis-sale.js"></script>

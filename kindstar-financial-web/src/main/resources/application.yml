@@ -1,0 +1,29 @@
+#HTTP_URL: http://LIS-8100
+server:
+  port: 8200
+
+
+
+#直接可以调用eureka中的服务名称
+eureka:
+  client:
+    register-with-eureka: false                 #false表示不向注册中心注册自己
+    service-url:
+      defaultZone: http://localhost:6000/eureka   #调用eureka的服务,如果是集群就加上集群的所有链接以逗号隔开
+
+
+spring:
+  redis:
+    host: 192.168.107.15
+    port: 6379
+    password: 1qw2!QW@
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,
+                              classpath:/static/,classpath:/public/,file:/qrcode/,
+                              file:/guidepicture/
+
+
+
+

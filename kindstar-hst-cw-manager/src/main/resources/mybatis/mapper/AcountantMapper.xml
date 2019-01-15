@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kindstar.hst.cw.mapper.AccountantMapper">
+
+    <!--财务数据查询-->
+    <select id="findAccountantInfoAll" parameterType="com.kindstar.hst.lis.common.pojo.SubmitDataVo" resultType="com.kindstar.hst.cw.pojo.AccountantInfo">
+        SELECT a.*,b.salesNet,b.salesRemarks,b.returnedNumber,
+        b.returnedTime,b.returnedPrice,b.balancePrice,b.countPrice,b.invoice,
+        b.invoicePrice,b.invoiceNumber,b.rate1,b.rate2,b.payTime,b.payPrice,b.refundTime,
+        b.refundPrice,b.receipt,b.idNumber,b.subbarCode,b.adjustmentTime,b.adjustmentDiscount,
+        b.adjustedNet,b.adjustedDifference,b.adjustmentRemarks,b.remarks,b.validationInvoiceAmount,
+        b.isAudit,b.auditTime
+        FROM t_saleinfo a LEFT JOIN t_accountant b ON a.saleid=b.saleid
+        WHERE 1=1
+        <choose>
+            <when test='isAudit != null'>
+                and b.isAudit=#{isAudit}
+            </when>
+            <otherwise>
+                and (b.isAudit IS NULL or b.isAudit=0)
+            </otherwise>
+        </choose>
+        <if test="officeSubmit != null">
+            and b.officeSubmit=#{officeSubmit}
+        </if>
+        <include refid="com.kindstar.hst.cw.mapper.SaleinfoMapper.findSql"/>
+    </select>
+
+    <!--销售提交时使用-->
+    <insert id="insertAccountantAll" parameterType="com.kindstar.hst.lis.common.pojo.SubmitDataVo">
+        INSERT INTO t_accountant(saleid,isAudit,officeSubmit)
+        SELECT saleid,0,0 FROM t_saleinfo
+        <where>
+            <include refid="com.kindstar.hst.cw.mapper.SaleinfoMapper.findSql"/>
+        </where>
+    </insert>
+
+    <!--财务数据保存-->
+    <insert id="saveAccountantAll" parameterType="com.kindstar.hst.cw.pojo.SaveCloudVo">
+        REPLACE INTO t_accountant
+        (   saleid,salesNet,salesRemarks,returnedNumber,returnedTime,returnedPrice,balancePrice,
+            countPrice,invoice,invoicePrice,invoiceNumber,rate1,rate2,payTime,payPrice,refundTime,
+            refundPrice,receipt,idNumber,subbarCode,adjustmentTime,adjustmentDiscount,adjustedNet,
+            adjustedDifference,adjustmentRemarks,remarks,validationInvoiceAmount,isAudit
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                #{item.saleid},#{item.salesNet},#{item.salesRemarks},#{item.returnedNumber},#{item.returnedTime},
+                #{item.returnedPrice},#{item.balancePrice},#{item.countPrice},#{item.invoice},#{item.invoicePrice},
+                #{item.invoiceNumber},#{item.rate1},#{item.rate2},#{item.payTime},#{item.payPrice},
+                #{item.refundTime},#{item.refundPrice},#{item.receipt},#{item.idNumber},
+                #{item.subbarCode},#{item.adjustmentTime},#{item.adjustmentDiscount},#{item.adjustedNet},
+                #{item.adjustedDifference},#{item.adjustmentRemarks},#{item.remarks},#{item.validationInvoiceAmount},
+                #{item.isAudit}
+            )
+        </foreach>
+    </insert>
+
+    <!--根据条件更新审核状态-->
+    <update id="updateAuditStatus" parameterType="com.kindstar.hst.lis.common.pojo.SubmitDataVo">
+        UPDATE t_accountant SET isAudit=${editIsAudit},auditTime=NOW() WHERE saleid IN (
+            SELECT saleid FROM t_saleinfo
+            <where>
+                <include refid="com.kindstar.hst.cw.mapper.SaleinfoMapper.findSql"/>
+            </where>
+        )
+        and isAudit=${isAudit}
+    </update>
+    <!--撤回办事处数据-->
+    <update id="backOfficeData" parameterType="com.kindstar.hst.lis.common.pojo.SubmitDataVo">
+        UPDATE t_accountant SET officeSubmit=${editOfficeSubmit} WHERE saleid IN (
+        SELECT saleid FROM t_saleinfo
+        <where>
+            <include refid="com.kindstar.hst.cw.mapper.SaleinfoMapper.findSql"/>
+        </where>
+        )
+        and isAudit=${isAudit} and officeSubmit=${officeSubmit}
+    </update>
+
+
+    <!--财务撤回以销售提交数据,审核数据是不能撤回的-->
+    <delete id="deleteAccountantAll" parameterType="com.kindstar.hst.lis.common.pojo.SubmitDataVo">
+        DELETE FROM t_accountant WHERE saleid in (
+            SELECT saleid FROM t_saleinfo
+            <where>
+                <include refid="com.kindstar.hst.cw.mapper.SaleinfoMapper.findSql"/>
+            </where>
+        )
+        and isAudit=0
+    </delete>
+</mapper>
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 后台大布局 - Layui</title>
+    <link rel="stylesheet" href="/content/layui/css/layui.css">
+    <style>
+        #login-div{
+            position:absolute;
+            width:100%;
+            left:0;
+            top:0;
+            bottom:0;
+            right:0;
+            z-index:1;
+            background:#3283AC url(/content/images/bgcolor.jpg) no-repeat center
+        }
+
+        #form-div{
+            /*background:url(/content/images/admin-loginform-bg.png) no-repeat;*/
+            padding: 40px 0 20px 0;
+            position:absolute; width:617px;
+            left:50%; top:50%; margin-left:-309px; margin-top:-184px; }
+        #form-div .layui-input-inline{
+            width: 60%;
+        }
+        #form-div .layui-input-inline input{
+            height: 50px;
+            font-size: 20px;
+        }
+        #form-div .layui-icon{
+            font-size: 45px; color: #2F4056;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+<div id="login-div">
+    <fieldset id="form-div" class="layui-elem-field">
+        <legend style="color:white;">北京海思特财务对接系统</legend>
+        <div class="layui-field-box">
+            <form class="layui-form" action="index.html">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="layui-icon layui-icon-username"></i>
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">辅助文字</div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <i class="layui-icon layui-icon-password"></i>
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">辅助文字</div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </fieldset>
+</div>
+<script src="/content/layui/layui.js"></script>
+<script src="/content/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+</body>
+</html>

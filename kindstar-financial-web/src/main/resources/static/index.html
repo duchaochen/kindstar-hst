@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lishtml</title>
+    <link href="/content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/content/layui/css/layui.css">
+    <style>
+        iframe{
+            border-collapse: collapse;
+            border: 0px;
+            overflow: hidden;
+        }
+        .layui-body{
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body >
+<div id="home_div" class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">系统logo</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">
+                <i class="fa fa-user-o"></i>
+                测试1</a>
+            </li>
+            <li class="layui-nav-item"><a href="">
+                <i class="fa fa-user-circle-o"></i>
+                测试2</a></li>
+            <li class="layui-nav-item"><a href="">
+                <i class="fa fa-user-circle"></i>
+                用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    贤心
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">
+                <i class="fa fa-power-off"></i>
+                退了</a></li>
+        </ul>
+    </div>
+
+    <!--左边菜单开始-->
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" >
+                <li v-for="parentitem in items" class="layui-nav-item"
+                    :class="{'layui-nav-itemed':parentitem.active}">
+                    <a href="javascript:;" >
+                        <i :class="parentitem.iocn"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{parentitem.title}}
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd v-for= "childitem in parentitem.list">
+                            <!--:style="{'color':1==currentId?'red':'white'}"-->
+                            <a href="javascript:;" v-on:click="showMenu(childitem,'menu-tab')">
+                                <i :class="childitem.iocn"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                                {{childitem.title}}</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 0px;" scrolling="no">
+            <div class="layui-tab" lay-filter="menu-tab" lay-allowClose="true">
+                <ul class="layui-tab-title">
+                    <li lay-id="111"  class="layui-this" >网站设置</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <h1>个人工作室</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        ©www.dcc.com.cn - 工作室
+    </div>
+</div>
+</body>
+</html>
+<script src="/content/layui/layui.js"></script>
+<script src="/content/vue.min.js"></script>
+<script src="/content/js/layui-config.js"></script>
+<script src="/content/js/index.js"></script>
+

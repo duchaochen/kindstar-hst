@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kindstar-hst.iml" filepath="$PROJECT_DIR$/kindstar-hst.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kindstar-hst-cw-manager/kindstar-hst-cw-manager.iml" filepath="$PROJECT_DIR$/kindstar-hst-cw-manager/kindstar-hst-cw-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kindstar-hst-lis-manager/kindstar-hst-lis-manager.iml" filepath="$PROJECT_DIR$/kindstar-hst-lis-manager/kindstar-hst-lis-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kindstar-hst-lis-pojo/kindstar-hst-lis-pojo.iml" filepath="$PROJECT_DIR$/kindstar-hst-lis-pojo/kindstar-hst-lis-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kindstar-common/kindstart-common.iml" filepath="$PROJECT_DIR$/kindstar-common/kindstart-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kindstar-financial-web/kindstart-financial-web.iml" filepath="$PROJECT_DIR$/kindstar-financial-web/kindstart-financial-web.iml" />
+    </modules>
+  </component>
+</project>

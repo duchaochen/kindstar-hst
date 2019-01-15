@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kindstar.hst.cw.mapper.OfficeMapper">
+
+    <!--根据条件更新审核状态-->
+    <update id="updateofficeSubmit" parameterType="com.kindstar.hst.lis.common.pojo.SubmitDataVo">
+        UPDATE t_accountant SET officeSubmit=${editOfficeSubmit},officeSubmitTime=NOW() WHERE saleid IN (
+            SELECT saleid FROM t_saleinfo
+            <where>
+                <include refid="com.kindstar.hst.cw.mapper.SaleinfoMapper.findSql"/>
+            </where>
+        )
+        and isAudit=${isAudit} and officeSubmit=${officeSubmit}
+    </update>
+</mapper>
+

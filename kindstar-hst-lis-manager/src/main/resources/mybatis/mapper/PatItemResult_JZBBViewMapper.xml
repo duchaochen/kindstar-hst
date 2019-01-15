@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kindstar.hst.lis.mapper.PatItemResult_JZBBViewMapper">
+    
+    <resultMap id="patItemResult_JZBBViewMap" type="com.kindstar.hst.lis.pojo.PatItemResult_JZBBView">
+        <result column="Jzbbxh" property="jzbbxh"/>
+        <result column="AreaName1" property="areaName1"/>
+        <result column="AreaName" property="areaName"/>
+        <result column="sellUser" property="sellUser"/>
+        <result column="DepartmentName" property="departmentName"/>
+        <result column="RealName" property="realName"/>
+        <result column="Age" property="age"/>
+        <result column="Gender" property="gender"/>
+        <result column="Hospitalization" property="hospitalization"/>
+        <result column="barCode" property="barCode"/>
+        <result column="CustomLevelCode" property="customLevelCode"/>
+        <result column="HospitalizationName" property="hospitalizationName"/>
+        <result column="Signing" property="signing"/>
+        <result column="BillDoctor" property="billDoctor"/>
+        <result column="CombinationItemName" property="combinationItemName"/>
+        <result column="NoteTime" property="noteTime"/>
+        <result column="SquadName" property="squadName"/>
+        <result column="productLine" property="productLine"/>
+        <result column="SampleType" property="sampleType"/>
+        <result column="AcceptanceNO" property="acceptanceNO"/>
+        <result column="price" property="price"/>
+        <result column="logisticsUser" property="logisticsUser"/>
+        <result column="SampleStatus" property="sampleStatus"/>
+        <result column="Discount" property="discount"/>
+
+    </resultMap>
+    
+    <select id="selectAll" parameterType="com.kindstar.hst.lis.common.pojo.SubmitDataVo"
+            resultMap="patItemResult_JZBBViewMap">
+        SELECT distinct
+        a.Jzbbxh
+        ,a.SellUser sellUser
+        ,DepartmentName
+        ,RealName
+        ,Age
+        ,Gender
+        ,Hospitalization
+        ,a.BarCode barCode
+        ,AreaName1
+        ,AreaName
+        ,CustomLevelCode
+        ,HospitalizationName
+        ,Signing
+        ,BillDoctor
+        ,CombinationItemName
+        ,NoteTime
+        ,SquadName
+        ,'' productLine
+        ,SampleType
+        ,AcceptanceNO
+        ,Application_Address
+        ,a.LogisticsUser logisticsUser
+        ,SampleStatus
+        ,'' price
+        ,Discount
+        FROM dbo.PatItemResult_JZBBView a ,
+        [BaseLis3.0]..YY_Hospital b
+        WHERE a.HospitalCode = b.HospitalCode
+        and convert(char(10),NoteTime,120) BETWEEN #{startdate} and #{stopdate}
+        <if test='areaval != null and areaval neq ""'>
+            and AreaName=#{areaval}
+        </if>
+        <if test='hospitalval != null and hospitalval neq ""'>
+            and HospitalizationName=#{hospitalval}
+        </if>
+        order by a.Jzbbxh,CombinationItemName
+    </select>
+</mapper>
+

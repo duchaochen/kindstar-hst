@@ -1,0 +1,53 @@
+server:
+  port: 8100
+
+#mybatis配置
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  # 指定sql映射文件位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+#所有Entity别名类所在包
+#mybatis.type-aliases-package=com.kindstar.hst.lis.pojo
+#mapper映射文件
+#mybatis.mapper-locations=
+#jdbc:sqlserver://192.168.107.11:1433;database=hst2017
+
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://192.168.107.11:1433;database=hst2017
+    username: sa
+    password: 1qw2!QW@
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+          min-idle: 5                                           # 数据库连接池的最小维持连接数
+          initial-size: 5                                       # 初始化连接数
+          max-total: 5                                          # 最大连接数
+          max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+
+
+  application:
+    name: lis-8100 #对外暴露的微服务名称
+
+  redis:
+    host: 192.168.107.15
+    port: 6379
+    password: 1qw2!QW@
+
+
+
+
+eureka:
+  client: # 客户端注册进入eureka服务列表内
+    service-url:
+      defaultZone: http://localhost:6000/eureka
+  instance:
+    instance-id: lis-8100         # 自定义服务名称
+    prefer-ip-address: true       # 访问路径可以显示IP地址
+
+info:         # 点击服务链接的显示数据
+  app.name: kindstar财务系统对接lis系统的接口
+  company.name: www.kindstar.com
+  build.artifactId: kindstar-hst              #$project.artifactId$
+  build.version: 1.0-SNAPSHOT                 #$project.version$
+
